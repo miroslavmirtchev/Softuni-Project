@@ -20,3 +20,8 @@ let db = admin.firestore();
 app.get("/", (req, res) => {
   res.sendFile(path.join(staticPath, "index.html"));
 })
+
+//signup route
+app.get('/signup', (req, res) => {
+  res.sendFile(path.join(staticPath, "signup.html"));
+})
