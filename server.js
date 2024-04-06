@@ -13,3 +13,10 @@ admin.initializeApp({
 });
 
 let db = admin.firestore();
+
+
+//routes
+//home route
+app.get("/", (req, res) => {
+  res.sendFile(path.join(staticPath, "index.html"));
+})
