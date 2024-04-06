@@ -25,3 +25,8 @@ app.get("/", (req, res) => {
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(staticPath, "signup.html"));
 })
+
+// login route
+app.get('/login', (req, res) => {
+  res.sendFile(path.join(staticPath, "login.html"));
+})
