@@ -22,3 +22,17 @@ const compareToken = (token, key) => {
     }
     return false;
 }
+
+//  common functions
+
+// send data function
+const sendData = (path, data) => {
+    fetch(path, {
+        method: 'post',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify(data)
+    }).then((res) => res.json())
+    .then(response => {
+        processData(response);
+    })
+}
