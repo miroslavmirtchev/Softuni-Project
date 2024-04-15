@@ -60,3 +60,11 @@ const processData = (data) => {
         location.href = '/seller';
     }
 }
+
+// alert function
+const showAlert = (msg, type='error') => {
+    let alertBox = document.querySelector('.alert-box');
+    let alertMsg = document.querySelector('.alert-msg');
+    let alertImg = document.querySelector('.alert-img');
+
+    alertMsg.innerHTML = msg;
