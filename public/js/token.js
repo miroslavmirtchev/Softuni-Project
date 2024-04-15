@@ -36,3 +36,14 @@ const sendData = (path, data) => {
         processData(response);
     })
 }
+
+const processData = (data) => {
+    loader.style.display = null;
+    if(data.alert){
+        if(data.type){
+            showAlert(data.alert, 'success');
+        } else{
+            showAlert(data.alert);
+        }
+    }
+}
