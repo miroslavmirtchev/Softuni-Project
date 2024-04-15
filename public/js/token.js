@@ -68,3 +68,12 @@ const showAlert = (msg, type='error') => {
     let alertImg = document.querySelector('.alert-img');
 
     alertMsg.innerHTML = msg;
+
+    if(type == 'success'){
+        alertImg.src = `img/success.png`;
+        alertMsg.style.color = `#0ab50a`;
+    } else{ // means it is an err
+        alertImg.src = `img/error.png`;
+        alertMsg.style.color = null;
+    }
+}
