@@ -76,4 +76,10 @@ const showAlert = (msg, type='error') => {
         alertImg.src = `img/error.png`;
         alertMsg.style.color = null;
     }
+
+    alertBox.classList.add('show');
+    setTimeout(() => {
+        alertBox.classList.remove('show');
+    }, 3000);
+    return false;
 }
