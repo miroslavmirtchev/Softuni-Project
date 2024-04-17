@@ -76,3 +76,20 @@ const setData = (data) => {
         cartBtn.innerHTML = add_product_to_cart_or_wishlist('cart', data);
     })
 }
+
+// fetch data
+const fetchProductData = () => {
+    fetch('/get-products', {
+        method: 'post',
+        headers: new Headers({ 'Content-Type': 'application/json' }),
+        body: JSON.stringify({id: productId})
+    })
+    .then(res => res.json())
+    .then(data => {
+        setData(data);
+        getProducts(data.tags[1]).then(data => createProductSlider(data, '.container-for-card-slider', 'similar products'))
+    })
+    .catch(err => {
+        location.replace('/404');
+    })
+}
