@@ -46,3 +46,9 @@ const setData = (data) => {
             item.style.display = 'none';
         }
     })
+
+    //setting up texts
+    const name = document.querySelector('.product-brand');
+    const shortDes = document.querySelector('.product-short-des');
+    const des = document.querySelector('.des');
+}
