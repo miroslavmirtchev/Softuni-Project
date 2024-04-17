@@ -51,4 +51,17 @@ const setData = (data) => {
     const name = document.querySelector('.product-brand');
     const shortDes = document.querySelector('.product-short-des');
     const des = document.querySelector('.des');
+
+    title.innerHTML += name.innerHTML = data.name;
+    shortDes.innerHTML = data.shortDes;
+    des.innerHTML = data.des;
+
+    // pricing
+    const sellPrice = document.querySelector('.product-price');
+    const actualPrice = document.querySelector('.product-actual-price');
+    const discount = document.querySelector('.product-discount');
+
+    sellPrice.innerHTML = `$${data.sellPrice}`;
+    actualPrice.innerHTML = `$${data.actualPrice}`;
+    discount.innerHTML = `( ${data.discount}% off )`;
 }
