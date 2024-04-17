@@ -64,4 +64,10 @@ const setData = (data) => {
     sellPrice.innerHTML = `$${data.sellPrice}`;
     actualPrice.innerHTML = `$${data.actualPrice}`;
     discount.innerHTML = `( ${data.discount}% off )`;
+
+    // wishlist and cart btn
+    const wishlistBtn = document.querySelector('.wishlist-btn');
+    wishlistBtn.addEventListener('click', () => {
+        wishlistBtn.innerHTML = add_product_to_cart_or_wishlist('wishlist', data);
+    })
 }
