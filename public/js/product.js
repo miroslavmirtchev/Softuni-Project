@@ -70,4 +70,9 @@ const setData = (data) => {
     wishlistBtn.addEventListener('click', () => {
         wishlistBtn.innerHTML = add_product_to_cart_or_wishlist('wishlist', data);
     })
+
+    const cartBtn = document.querySelector('.cart-btn');
+    cartBtn.addEventListener('click', () => {
+        cartBtn.innerHTML = add_product_to_cart_or_wishlist('cart', data);
+    })
 }
