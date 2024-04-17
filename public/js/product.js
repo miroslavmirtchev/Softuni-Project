@@ -26,3 +26,23 @@ sizeBtns.forEach((item, i) => { // looping through each button
         size = item.innerHTML;
     })
 })
+
+const setData = (data) => {
+    let title = document.querySelector('title');
+
+    // setup the images
+    productImages.forEach((img, i) => {
+        if(data.images[i]){
+            img.src = data.images[i];
+        } else{
+            img.style.display = 'none';
+        }
+    })
+    productImages[0].click();
+    
+    // setup size buttons
+    sizeBtns.forEach(item => {
+        if(!data.sizes.includes(item.innerHTML)){
+            item.style.display = 'none';
+        }
+    })
