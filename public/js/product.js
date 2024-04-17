@@ -93,3 +93,9 @@ const fetchProductData = () => {
         location.replace('/404');
     })
 }
+
+let productId = null;
+if(location.pathname != '/products'){
+    productId = decodeURI(location.pathname.split('/').pop());
+    fetchProductData();
+}
