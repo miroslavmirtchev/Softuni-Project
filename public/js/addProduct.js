@@ -63,3 +63,19 @@ uploadImages.forEach((fileupload, index) => {
         }
     })
 })
+
+// form submission
+
+const productName = document.querySelector('#product-name');
+const shortLine = document.querySelector('#short-des');
+const des = document.querySelector('#des');
+
+let sizes = []; // will store all the sizes
+
+const stock = document.querySelector('#stock');
+const tags = document.querySelector('#tags');
+const tac = document.querySelector('#tac');
+
+// buttons
+const addProductBtn = document.querySelector('#add-btn');
+const saveDraft = document.querySelector('#save-btn');
