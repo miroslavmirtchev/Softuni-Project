@@ -16,3 +16,16 @@ const setupSlidingEffect = () => {
         })
     })
 }
+
+// fetch product cards
+const getProducts = (tag) => {
+    return fetch('/get-products', {
+        method: "post",
+        headers: new Headers({"Content-Type": "application/json"}),
+        body: JSON.stringify({tag: tag})
+    })
+    .then(res => res.json())
+    .then(data => {
+        return data;
+    })
+}
