@@ -29,3 +29,18 @@ const getProducts = (tag) => {
         return data;
     })
 }
+
+// create product slider
+const createProductSlider = (data, parent, title) => {
+    let slideContainer = document.querySelector(`${parent}`);
+
+    slideContainer.innerHTML += `
+    <section class="product">
+        <h2 class="product-category">${title}</h2>
+        <button class="pre-btn"><img src="../img/arrow.png" alt=""></button>
+        <button class="nxt-btn"><img src="../img/arrow.png" alt=""></button>
+        ${createProductCards(data)}
+    </section>
+    `
+    setupSlidingEffect();
+}
