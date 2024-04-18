@@ -183,4 +183,14 @@ const setFormsData = (data) => {
         let productImage = document.querySelector('.product-image');
         productImage.style.backgroundImage = `url(${url})`;
     })
+
+    // setup sizes
+    sizes = data.sizes;
+
+    let sizeCheckbox = document.querySelectorAll('.size-checkbox');
+    sizeCheckbox.forEach(item => {
+        if(sizes.includes(item.value)){
+            item.setAttribute('checked', '');
+        }
+    })
 }
