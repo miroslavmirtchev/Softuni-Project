@@ -57,3 +57,23 @@ applyFormButton.addEventListener('click', () => {
         })
     }
 })
+
+
+const setupProducts = () => {
+    fetch('/get-products', {
+        method: 'post',
+        headers: new Headers({"Content-Type": "application/json"}),
+        body: JSON.stringify({email: user.email})
+    })
+    .then(res => res.json())
+    .then(data =>  {
+        loader.style.display = null;
+        productListingElement.classList.remove('hide');
+        if(data == 'no products'){
+            let emptySvg = document.querySelector('.no-product-image');
+            emptySvg.classList.remove('hide');
+        } else{
+            data.forEach(product => createProduct(product));
+        }
+    });
+}
