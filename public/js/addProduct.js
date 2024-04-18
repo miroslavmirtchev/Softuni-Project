@@ -79,3 +79,15 @@ const tac = document.querySelector('#tac');
 // buttons
 const addProductBtn = document.querySelector('#add-btn');
 const saveDraft = document.querySelector('#save-btn');
+
+
+// store size function
+const storeSizes = () => {
+    sizes = [];
+    let sizeCheckBox = document.querySelectorAll('.size-checkbox');
+    sizeCheckBox.forEach(item => {
+        if(item.checked){
+            sizes.push(item.value);
+        }
+    })
+}
