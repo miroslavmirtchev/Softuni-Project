@@ -91,3 +91,26 @@ const storeSizes = () => {
         }
     })
 }
+
+const validateForm = () => {
+    if(!productName.value.length){
+        return showAlert('enter product name');
+    } else if(shortLine.value.length > 100 || shortLine.value.length < 10){
+        return showAlert('short description must be between 10 to 100 letters long');
+    } else if(!des.value.length){
+        return showAlert('enter detail description about the product');
+    } else if(!imagePaths.length){ // image link array
+        return showAlert('upload atleast one product image')
+    } else if(!sizes.length){ // size array
+        return showAlert('select at least one size');
+    } else if(!actualPrice.value.length || !discount.value.length || !sellingPrice.value.length){
+        return showAlert('you must add pricings');
+    } else if(stock.value < 20){
+        return showAlert('you should have at least 20 items in stock');
+    } else if(!tags.value.length){
+        return showAlert('enter few tags to help ranking your product in search');
+    } else if(!tac.checked){
+        return showAlert('you must agree to our terms and conditions');
+    } 
+    return true;
+}
