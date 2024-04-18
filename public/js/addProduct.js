@@ -163,3 +163,15 @@ saveDraft.addEventListener('click', () => {
         sendData('/add-product', data);
     }
 })
+
+// exisiting product detail handle
+
+const setFormsData = (data) => {
+    productName.value = data.name;
+    shortLine.value = data.shortDes;
+    des.value = data.des;
+    actualPrice.value = data.actualPrice;
+    discountPercentage.value = data.discount;
+    sellingPrice.value = data.sellPrice;
+    stock.value = data.stock;
+    tags.value = data.tags;
