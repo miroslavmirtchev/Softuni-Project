@@ -175,3 +175,12 @@ const setFormsData = (data) => {
     sellingPrice.value = data.sellPrice;
     stock.value = data.stock;
     tags.value = data.tags;
+    // set up images
+    imagePaths = data.images;
+    imagePaths.forEach((url, i) => {
+        let label = document.querySelector(`label[for=${uploadImages[i].id}]`);
+        label.style.backgroundImage = `url(${url})`;
+        let productImage = document.querySelector('.product-image');
+        productImage.style.backgroundImage = `url(${url})`;
+    })
+}
