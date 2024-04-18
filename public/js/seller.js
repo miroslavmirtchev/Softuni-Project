@@ -27,3 +27,13 @@ showApplyFormBtn.addEventListener('click', () => {
     becomeSellerElement.classList.add('hide');
     applyForm.classList.remove('hide');
 })
+
+//  form submission
+
+const applyFormButton = document.querySelector('#apply-form-btn');
+const businessName = document.querySelector('#business-name');
+const address = document.querySelector('#business-add');
+const about = document.querySelector('#about');
+const number = document.querySelector('#number');
+const tac = document.querySelector('#terms-and-cond');
+const legitInfo = document.querySelector('#legitInfo');
