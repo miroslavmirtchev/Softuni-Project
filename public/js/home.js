@@ -68,4 +68,11 @@ const createProductCards = (data, parent) => {
             `
         }
     }
+
+    if(parent){
+        let cardContainer = document.querySelector(parent);
+        cardContainer.innerHTML = start + middle + end;
+    } else{
+        return start + middle + end;
+    }
 }
