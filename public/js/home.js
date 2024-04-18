@@ -44,3 +44,28 @@ const createProductSlider = (data, parent, title) => {
     `
     setupSlidingEffect();
 }
+
+const createProductCards = (data, parent) => {
+    //here parent is for search product
+    let start = '<div class="product-container">';
+    let middle = ''; // this will contain card HTML
+    let end = '</div>';
+
+    for(let i = 0; i < data.length; i++){
+        if(data[i].id != decodeURI(location.pathname.split('/').pop())){
+            middle += `
+            <div class="product-card">
+                <div class="product-image">
+                    <span class="discount-tag">${data[i].discount}% off</span>
+                    <img src="${data[i].images[0]}" class="product-thumb" alt="">
+                </div>
+                <div class="product-info" onclick="location.href = '/products/${data[i].id}'">
+                    <h2 class="product-brand">${data[i].name}</h2>
+                    <p class="product-short-des">${data[i].shortDes}</p>
+                    <span class="price">$${data[i].sellPrice}</span> <span class="actual-price">$${data[i].actualPrice}</span>
+                </div>
+            </div>
+            `
+        }
+    }
+}
