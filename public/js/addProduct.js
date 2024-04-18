@@ -133,3 +133,16 @@ const productData = () => {
         email: user.email
     }
 }
+
+addProductBtn.addEventListener('click', () => {
+    storeSizes();
+    // validate form
+    if(validateForm()){ // validateForm return true or false while doing validation
+        loader.style.display = 'block';
+        let data = productData();
+        if(productId){
+            data.id = productId;
+        }
+        sendData('/add-product', data);
+    }
+})
