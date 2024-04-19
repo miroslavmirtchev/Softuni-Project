@@ -82,3 +82,21 @@ app.post('/seller', (req, res) => {
       })
   }
 })
+
+// add product
+app.get('/add-product', (req, res) => {
+  res.sendFile(path.join(staticPath, "addProduct.html"));
+})
+
+app.get('/add-product/:id', (req, res) => {
+  res.sendFile(path.join(staticPath, "addProduct.html"));
+})
+
+// get the upload link
+app.get('/s3url', (req, res) => {
+  generateUrl().then(url => res.json(url));
+})
+
+// add product
+app.post('/add-product', (req, res) => {
+  let { name, shortDes, des, images, sizes, actualPrice, discount, sellPrice, stock, tags, tac, email, draft, id } = req.body;
