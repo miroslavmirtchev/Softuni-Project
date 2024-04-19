@@ -165,3 +165,14 @@ app.post('/get-products', (req, res) => {
       }
   })
 })
+
+app.post('/delete-product', (req, res) => {
+  let { id } = req.body;
+  
+  db.collection('products').doc(id).delete()
+  .then(data => {
+      res.json('success');
+  }).catch(err => {
+      res.json('err');
+  })
+})
