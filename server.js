@@ -176,3 +176,31 @@ app.post('/delete-product', (req, res) => {
       res.json('err');
   })
 })
+
+// product page
+app.get('/products/:id', (req, res) => {
+  res.sendFile(path.join(staticPath, "product.html"));
+})
+
+app.get('/search/:key', (req, res) => {
+  res.sendFile(path.join(staticPath, "search.html"));
+})
+
+app.get('/cart', (req, res) => {
+  res.sendFile(path.join(staticPath, "cart.html"));
+})
+
+app.get('/checkout', (req, res) => {
+  res.sendFile(path.join(staticPath, "checkout.html"));
+})
+
+app.post('/order', (req, res) => {
+  const { order, email, add } = req.body;
+
+  let transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+          user: process.env.EMAIL,
+          pass: process.env.PASSWORD
+      }
+  })
