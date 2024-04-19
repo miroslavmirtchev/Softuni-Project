@@ -58,3 +58,8 @@ app.post('/login', (req, res) => {
         }
     })
 })
+
+// seller route
+app.get('/seller', (req, res) => {
+  res.sendFile(path.join(staticPath, "seller.html"));
+})
