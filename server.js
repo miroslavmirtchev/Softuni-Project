@@ -134,3 +134,34 @@ db.collection('products').doc(docName).set(req.body)
     return res.json({'alert': 'some error occured. Try again'});
 })
 })
+
+// get products
+app.post('/get-products', (req, res) => {
+  let { email, id, tag } = req.body;
+
+  if(id){
+      docRef = db.collection('products').doc(id)
+  } else if(tag){
+      docRef = db.collection('products').where('tags', 'array-contains', tag)
+  } else{
+      docRef = db.collection('products').where('email', '==', email)
+  }
+
+  docRef.get()
+  .then(products => {
+      if(products.empty){
+          return res.json('no products');
+      }
+      let productArr = [];
+      if(id){
+          return res.json(products.data());
+      } else{
+          products.forEach(item => {
+              let data = item.data();
+              data.id = item.id;
+              productArr.push(data);
+          })
+          res.json(productArr)
+      }
+  })
+})
