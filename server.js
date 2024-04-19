@@ -37,3 +37,24 @@ app.post('/login', (req, res) => {
   if(!email.length || !password.length){
       return res.json({'alert': 'fill all the inputs'})
   }
+
+  db.collection('users').doc(email).get()
+    .then(user => {
+        if(!user.exists){ // if email does not exists
+            return res.json({'alert': 'log in email does not exists'})
+        } else{
+            bcrypt.compare(password, user.data().password, (err, result) => {
+                if(result){
+                    let data = user.data();
+                    return res.json({
+                        name: data.name,
+                        email: data.email,
+                        seller: data.seller,
+                    })
+                } else{
+                    return res.json({'alert': 'password is incorrect'});
+                }
+            })
+        }
+    })
+})
