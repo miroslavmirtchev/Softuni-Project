@@ -279,3 +279,12 @@ let docName = email + Math.floor(Math.random() * 123719287419824);
 
     })
 })
+
+// 404 route
+app.get('/404', (req, res) => {
+  res.sendFile(path.join(staticPath, "404.html"));
+})
+
+app.use((req, res) => {
+  res.redirect('/404');
+})
