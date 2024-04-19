@@ -30,3 +30,10 @@ app.get('/signup', (req, res) => {
 app.get('/login', (req, res) => {
   res.sendFile(path.join(staticPath, "login.html"));
 })
+
+app.post('/login', (req, res) => {
+  let { email, password } = req.body;
+
+  if(!email.length || !password.length){
+      return res.json({'alert': 'fill all the inputs'})
+  }
