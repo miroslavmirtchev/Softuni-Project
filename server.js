@@ -123,3 +123,14 @@ app.post('/add-product', (req, res) => {
         return res.json({'alert': 'you must agree to our terms and conditions'});
     } 
 }
+
+// add product
+let docName = id == undefined ? `${name.toLowerCase()}-${Math.floor(Math.random() * 5000)}` : id;
+db.collection('products').doc(docName).set(req.body)
+.then(data => {
+    res.json({'product': name});
+})
+.catch(err => {
+    return res.json({'alert': 'some error occured. Try again'});
+})
+})
