@@ -2,15 +2,15 @@ const setupSlidingEffect = () => {
     const productContainers = [...document.querySelectorAll('.product-container')];
     const nxtBtn = [...document.querySelectorAll('.nxt-btn')];
     const preBtn = [...document.querySelectorAll('.pre-btn')];
-    
+
     productContainers.forEach((item, i) => {
-        let containerDimenstions = item.getBoundingClientRect();
-        let containerWidth = containerDimenstions.width;
-    
+        let containerDimentions = item.getBoundingClientRect();
+        let containerWidth = containerDimentions.width;
+
         nxtBtn[i].addEventListener('click', () => {
             item.scrollLeft += containerWidth;
         })
-    
+
         preBtn[i].addEventListener('click', () => {
             item.scrollLeft -= containerWidth;
         })
@@ -24,10 +24,10 @@ const getProducts = (tag) => {
         headers: new Headers({"Content-Type": "application/json"}),
         body: JSON.stringify({tag: tag})
     })
-    .then(res => res.json())
-    .then(data => {
-        return data;
-    })
+        .then(res => res.json())
+        .then(data => {
+            return data;
+        })
 }
 
 // create product slider
@@ -37,8 +37,8 @@ const createProductSlider = (data, parent, title) => {
     slideContainer.innerHTML += `
     <section class="product">
         <h2 class="product-category">${title}</h2>
-        <button class="pre-btn"><img src="../img/arrow.png" alt=""></button>
-        <button class="nxt-btn"><img src="../img/arrow.png" alt=""></button>
+        <button class="pre-btn"><img src="./img/arrow.png" alt=""></button>
+        <button class="nxt-btn"><img src="./img/arrow.png" alt=""></button>
         ${createProductCards(data)}
     </section>
     `
@@ -75,6 +75,7 @@ const createProductCards = (data, parent) => {
     } else{
         return start + middle + end;
     }
+
 }
 
 const add_product_to_cart_or_wishlist = (type, product) => {
