@@ -17,3 +17,23 @@ const createSmallCards = (data) => {
     </div>
     `;
 }
+
+let totalBill = 0;
+
+const setProducts = (name) => {
+    const element = document.querySelector(`.${name}`);
+    let data = JSON.parse(localStorage.getItem(name));
+    if(data == null){
+        element.innerHTML = `<img src="img/empty-cart.png" class="empty-img" alt="">`;
+    } else{
+        for(let i = 0; i < data.length; i++){
+            element.innerHTML += createSmallCards(data[i]);
+            if(name == 'cart'){
+                totalBill += Number(data[i].sellPrice * data[i].item);
+            }
+            updateBill();
+        }
+    }
+
+    setupEvents(name);
+}
