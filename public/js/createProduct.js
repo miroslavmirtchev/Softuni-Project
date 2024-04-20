@@ -17,3 +17,14 @@ const createProduct = (data) => {
     </div>
     `;
 }
+
+const openDeletePopup = (id) => {
+    let deleteAlert = document.querySelector('.delete-alert');
+    deleteAlert.style.display = 'flex';
+
+    let closeBtn = document.querySelector('.close-btn');
+    closeBtn.addEventListener('click', () => deleteAlert.style.display = null);
+
+    let deleteBtn = document.querySelector('.delete-btn');
+    deleteBtn.addEventListener('click', () => deleteItem(id))
+}
