@@ -37,3 +37,8 @@ const setProducts = (name) => {
 
     setupEvents(name);
 }
+
+const updateBill = () => {
+    let billPrice = document.querySelector('.bill');
+    billPrice.innerHTML = `$${totalBill}`;
+}
