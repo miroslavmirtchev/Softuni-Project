@@ -12,7 +12,7 @@ const createNav = () => {
                 <a>
                     <img src="../img/user.png" id="user-img" alt="">
                     <div class="login-logout-popup hide">
-                        <p class="account-info">Log in as, name</p>
+                        <p class="account-info">Logged in as, name</p>
                         <button class="btn" id="user-btn">Log out</button>
                     </div>
                 </a>
@@ -22,7 +22,7 @@ const createNav = () => {
         <ul class="links-container">
             <li class="link-item"><a href="/index.html" class="link">Home</a></li>
             <li class="link-item"><a href="/seller.html" class="link">Become a seller</a></li>
-            <li class="link-item"><a href="/addProduct.html" class="link">Add a Product</a></li>
+            <li class="link-item"><a href="/addProduct.html" class="link">Add a product</a></li>
         </ul>
     `;
 }
@@ -43,8 +43,8 @@ window.onload = () => {
     let user = JSON.parse(sessionStorage.user || null);
     if(user != null){
         // means user is logged in
-        popuptext.innerHTML = `log in as, ${user.name}`;
-        actionBtn.innerHTML = 'log out';
+        popuptext.innerHTML = `Logged in as, ${user.name}`;
+        actionBtn.innerHTML = 'Log out';
         actionBtn.addEventListener('click', () => {
             sessionStorage.clear();
             location.reload();
