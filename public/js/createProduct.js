@@ -28,3 +28,18 @@ const openDeletePopup = (id) => {
     let deleteBtn = document.querySelector('.delete-btn');
     deleteBtn.addEventListener('click', () => deleteItem(id))
 }
+
+const deleteItem = (id) => {
+    fetch('/delete-product', {
+        method: 'post',
+        headers: new Headers({'Content-Type': 'application/json'}),
+        body: JSON.stringify({id: id})
+    }).then(res => res.json())
+    .then(data => {
+        if(data == 'success'){
+            location.reload();
+        } else{
+            showAlert('some error occured while deleting the product. Try Again');
+        }
+    })
+}
