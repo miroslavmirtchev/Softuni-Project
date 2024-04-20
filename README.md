@@ -30,3 +30,8 @@ Start the server
   nodemon server.js
 ```
 
+The site is also accessible at
+```bash
+  https://clothing-site-b85f5.web.app
+```
+
