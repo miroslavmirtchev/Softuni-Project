@@ -20,6 +20,8 @@
         </div>
     </header>
 
+    <section id="men-tshirt-products"></section>
+
     <section class="collection-container">
         <a href="#" class="collection">
             <img src="img/women-collection.png" alt="">
@@ -42,5 +44,10 @@
     <script src="js/nav.js"></script>
     <script src="js/footer.js"></script>
     <script src="js/home.js"></script>
+
+    <script>
+        getProducts('Men Tshirt').then(data => createProductSlider(data, '#men-tshirt-products', 'Men T-shirt'))
+        getProducts('Men Tshirt').then(data => createProductSlider(data, '#men-tshirt-products-2', 'Men T-shirt'))
+    </script>
 </body>
 </html>
