@@ -46,8 +46,10 @@
     <script src="js/home.js"></script>
 
     <script>
-        getProducts('Men Tshirt').then(data => createProductSlider(data, '#men-tshirt-products', 'Men T-shirt'))
-        getProducts('Men Tshirt').then(data => createProductSlider(data, '#men-tshirt-products-2', 'Men T-shirt'))
+        getProducts('Men Tshirt').then(data =>  {
+            createProductSlider(data, '#men-tshirt-products', 'Men T-shirt')
+            createProductSlider(data, '#men-tshirt-products-2', 'Men T-shirt')
+        });
     </script>
 </body>
 </html>
