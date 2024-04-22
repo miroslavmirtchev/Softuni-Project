@@ -9,10 +9,48 @@ const nodemailer = require('nodemailer');
 let serviceAccount = require(path.join(__dirname,"clothing-site-b85f5-firebase-adminsdk-krhrz-6e08f768f3"));
 
 admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount)
+    credential: admin.credential.cert(serviceAccount)
 });
 
 let db = admin.firestore();
+
+// aws config
+const aws = require('aws-sdk');
+const dotenv = require('dotenv');
+
+dotenv.config();
+
+// aws parameters
+const region = "eu-north-1";
+const bucketName = "clothing-site";
+const accessKeyId = process.env.AWS_ACCESS_KEY;
+const secretAccessKey = process.env.AWS_SECRET_KEY;
+
+aws.config.update({
+    region,
+    accessKeyId,
+    secretAccessKey
+})
+
+// init s3
+const s3 = new aws.S3();
+
+// generate image upload link
+async function generateUrl(){
+    let date = new Date();
+    let id = parseInt(Math.random() * 10000000000);
+
+    const imageName = `${id}${date.getTime()}.jpg`;
+
+    const params = ({
+        Bucket: bucketName,
+        Key: imageName,
+        Expires: 300, //300 ms
+        ContentType: 'image/jpeg'
+    })
+    const uploadUrl = await s3.getSignedUrlPromise('putObject', params);
+    return uploadUrl;
+}
 
 // declare static path
 let staticPath = path.join(__dirname, "public");
@@ -51,30 +89,30 @@ app.post('/signup', (req, res) => {
         return res.json({'alert': 'invalid number, please enter valid one'});
     } else if(!tac){
         return res.json({'alert': 'you must agree to our terms and conditions'});
-    } 
-    
+    }
+
     // store user in db
     db.collection('users').doc(email).get()
-    .then(user => {
-        if(user.exists){
-            return res.json({'alert': 'email already exists'});
-        } else{
-            // encrypt the password before storing it.
-            bcrypt.genSalt(10, (err, salt) => {
-                bcrypt.hash(password, salt, (err, hash) => {
-                    req.body.password = hash;
-                    db.collection('users').doc(email).set(req.body)
-                    .then(data => {
-                        res.json({
-                            name: req.body.name,
-                            email: req.body.email,
-                            seller: req.body.seller,
-                        })
+        .then(user => {
+            if(user.exists){
+                return res.json({'alert': 'email already exists'});
+            } else{
+                // encrypt the password before storing it.
+                bcrypt.genSalt(10, (err, salt) => {
+                    bcrypt.hash(password, salt, (err, hash) => {
+                        req.body.password = hash;
+                        db.collection('users').doc(email).set(req.body)
+                            .then(data => {
+                                res.json({
+                                    name: req.body.name,
+                                    email: req.body.email,
+                                    seller: req.body.seller,
+                                })
+                            })
                     })
                 })
-            })
-        }
-    })
+            }
+        })
 })
 
 // login route
@@ -90,24 +128,24 @@ app.post('/login', (req, res) => {
     }
 
     db.collection('users').doc(email).get()
-    .then(user => {
-        if(!user.exists){ // if email does not exists
-            return res.json({'alert': 'log in email does not exists'})
-        } else{
-            bcrypt.compare(password, user.data().password, (err, result) => {
-                if(result){
-                    let data = user.data();
-                    return res.json({
-                        name: data.name,
-                        email: data.email,
-                        seller: data.seller,
-                    })
-                } else{
-                    return res.json({'alert': 'password is incorrect'});
-                }
-            })
-        }
-    })
+        .then(user => {
+            if(!user.exists){ // if email does not exists
+                return res.json({'alert': 'log in email does not exists'})
+            } else{
+                bcrypt.compare(password, user.data().password, (err, result) => {
+                    if(result){
+                        let data = user.data();
+                        return res.json({
+                            name: data.name,
+                            email: data.email,
+                            seller: data.seller,
+                        })
+                    } else{
+                        return res.json({'alert': 'password is incorrect'});
+                    }
+                })
+            }
+        })
 })
 
 // seller route
@@ -124,13 +162,13 @@ app.post('/seller', (req, res) => {
     } else{
         // update users seller status here.
         db.collection('sellers').doc(email).set(req.body)
-        .then(data => {
-            db.collection('users').doc(email).update({
-                seller: true
-            }).then(data => {
-                res.json(true);
+            .then(data => {
+                db.collection('users').doc(email).update({
+                    seller: true
+                }).then(data => {
+                    res.json(true);
+                })
             })
-        })
     }
 })
 
@@ -172,18 +210,18 @@ app.post('/add-product', (req, res) => {
             return res.json({'alert': 'enter few tags to help ranking your product in search'});
         } else if(!tac){
             return res.json({'alert': 'you must agree to our terms and conditions'});
-        } 
+        }
     }
 
     // add product
     let docName = id == undefined ? `${name.toLowerCase()}-${Math.floor(Math.random() * 5000)}` : id;
     db.collection('products').doc(docName).set(req.body)
-    .then(data => {
-        res.json({'product': name});
-    })
-    .catch(err => {
-        return res.json({'alert': 'some error occured. Try again'});
-    })
+        .then(data => {
+            res.json({'product': name});
+        })
+        .catch(err => {
+            return res.json({'alert': 'some error occured. Try again'});
+        })
 })
 
 // get products
@@ -199,31 +237,31 @@ app.post('/get-products', (req, res) => {
     }
 
     docRef.get()
-    .then(products => {
-        if(products.empty){
-            return res.json('no products');
-        }
-        let productArr = [];
-        if(id){
-            return res.json(products.data());
-        } else{
-            products.forEach(item => {
-                let data = item.data();
-                data.id = item.id;
-                productArr.push(data);
-            })
-            res.json(productArr)
-        }
-    })
+        .then(products => {
+            if(products.empty){
+                return res.json('no products');
+            }
+            let productArr = [];
+            if(id){
+                return res.json(products.data());
+            } else{
+                products.forEach(item => {
+                    let data = item.data();
+                    data.id = item.id;
+                    productArr.push(data);
+                })
+                res.json(productArr)
+            }
+        })
 })
 
 app.post('/delete-product', (req, res) => {
     let { id } = req.body;
-    
+
     db.collection('products').doc(id).delete()
-    .then(data => {
-        res.json('success');
-    }).catch(err => {
+        .then(data => {
+            res.json('success');
+        }).catch(err => {
         res.json('err');
     })
 })
@@ -267,7 +305,7 @@ app.post('/order', (req, res) => {
             <meta charset="UTF-8">
             <meta http-equiv="X-UA-Compatible" content="IE=edge">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Document</title>
+            <title>Mail Service</title>
 
             <style>
                 body{
@@ -318,17 +356,17 @@ app.post('/order', (req, res) => {
 
     let docName = email + Math.floor(Math.random() * 123719287419824);
     db.collection('order').doc(docName).set(req.body)
-    .then(data => {
+        .then(data => {
 
-        transporter.sendMail(mailOption, (err, info) => {
-            if(err){
-                res.json({'alert': 'opps! its seems like some err occured. Try again'})
-            } else{
-                res.json({'alert': 'your order is placed', 'type': 'success'});
-            }
+            transporter.sendMail(mailOption, (err, info) => {
+                if(err){
+                    res.json({'alert': 'opps! its seems like some err occured. Try again'})
+                } else{
+                    res.json({'alert': 'your order is placed', 'type': 'success'});
+                }
+            })
+
         })
-
-    })
 })
 
 // 404 route
