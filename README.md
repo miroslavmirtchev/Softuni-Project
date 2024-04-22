@@ -32,6 +32,6 @@ Start the server
 
 The site is also accessible at
 ```bash
-  https://clothing-site-b85f5.web.app
+  [https://clothing-site-b85f5.web.app](https://softuniproject.onrender.com)
 ```
 
