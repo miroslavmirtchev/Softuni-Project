@@ -32,9 +32,9 @@ const sendData = (path, data) => {
         headers: new Headers({'Content-Type': 'application/json'}),
         body: JSON.stringify(data)
     }).then((res) => res.json())
-    .then(response => {
-        processData(response);
-    })
+        .then(response => {
+            processData(response);
+        })
 }
 
 const processData = (data) => {
