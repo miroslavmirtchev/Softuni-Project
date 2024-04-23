@@ -356,17 +356,17 @@ app.post('/order', (req, res) => {
 
     let docName = email + Math.floor(Math.random() * 123719287419824);
     db.collection('order').doc(docName).set(req.body)
-        .then(data => {
+    .then(data => {
 
-            transporter.sendMail(mailOption, (err, info) => {
-                if(err){
-                    res.json({'alert': 'opps! its seems like some err occured. Try again'})
-                } else{
-                    res.json({'alert': 'your order is placed', 'type': 'success'});
-                }
-            })
-
+        transporter.sendMail(mailOption, (err, info) => {
+            if(err){
+                res.json({'alert': 'opps! its seems like some err occured. Try again'})
+            } else{
+                res.json({'alert': 'your order is placed', 'type': 'success'});
+            }
         })
+
+    })
 })
 
 // 404 route
