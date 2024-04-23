@@ -21,7 +21,7 @@ const createNav = () => {
         </div>
         <ul class="links-container">
             <li class="link-item"><a href="/index.html" class="link">Home</a></li>
-            <li class="link-item"><a href="/seller.html" class="link">Become a seller</a></li>
+            <li class="link-item"><a href="/seller.html" class="link">Seller</a></li>
             <li class="link-item"><a href="/addProduct.html" class="link">Add a product</a></li>
         </ul>
     `;
