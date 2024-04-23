@@ -21,8 +21,8 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 // aws parameters
-const region = "eu-north-1";
-const bucketName = "clothing-site";
+const region = "eu-central-1";
+const bucketName = "styles-phere";
 const accessKeyId = process.env.AWS_ACCESS_KEY;
 const secretAccessKey = process.env.AWS_SECRET_KEY;
 
