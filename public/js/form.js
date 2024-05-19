@@ -19,7 +19,6 @@ const number = document.querySelector('#number') || null;
 const tac = document.querySelector('#terms-and-cond') || null;
 const notification = document.querySelector('#notification') || null;
 
-
 submitBtn.addEventListener('click', () => {
     if(name != null){ // sign up page
         if(name.value.length < 3){
